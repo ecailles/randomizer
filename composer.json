@@ -45,17 +45,17 @@
     "scripts"          : {
         "test"      : [
             "phpcs --colors",
-            "peridot -g *Spec.php specs/"
+            "peridot -g *Spec.php -c peridot.php.dist specs/"
         ],
         "test-watch": [
-            "peridot -g *Spec.php --watch specs/"
+            "peridot -g *Spec.php -c peridot.php.dist --watch specs/"
         ],
         "docs"      : [
             "apigen generate -d api/"
         ],
         "test-ci"   : [
             "phpcs --colors",
-            "peridot -g *Spec.php specs/"
+            "peridot -g *Spec.php -c peridot.php.dist specs/"
         ]
     },
     "archive"          : {
@@ -68,7 +68,7 @@
             ".remarkignore",
             ".remarkrc",
             "phpcs.xml.dist",
-            "peridot.php",
+            "peridot.php.dist",
             ".coveralls.yml",
             "/specs/",
             "apigen.neon",

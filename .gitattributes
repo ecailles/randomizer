@@ -8,7 +8,7 @@ composer.json export-ignore
 .remarkignore export-ignore
 .remarkrc export-ignore
 phpcs.xml.dist export-ignore
-peridot.php export-ignore
+peridot.php.dist export-ignore
 .coveralls.yml export-ignore
 /specs/ export-ignore
 apigen.neon export-ignore
