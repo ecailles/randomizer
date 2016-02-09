@@ -1,0 +1,6 @@
+node_modules/
+npm-debug.log
+/composer.lock
+/vendor/
+/build/
+/api/

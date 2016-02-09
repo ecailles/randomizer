@@ -1,0 +1,79 @@
+{
+    "name"             : "ecailles/randomizer",
+    "description"      : "A random number generator",
+    "type"             : "library",
+    "keywords"         : [
+        "random",
+        "number",
+        "generator",
+        "randomizer"
+    ],
+    "homepage"         : "https://github.com/ecailles/randomizer",
+    "license"          : "MIT",
+    "authors"          : [
+        {
+            "name"    : "Whizark",
+            "email"   : "contact@whizark.com",
+            "homepage": "http://whizark.com",
+            "role"    : "Developer"
+        }
+    ],
+    "support"          : {
+        "email" : "contact@whizark.com",
+        "issues": "https://github.com/ecailles/randomizer/issues",
+        "wiki"  : "https://github.com/ecailles/randomizer/wiki",
+        "source": "https://github.com/ecailles/randomizer"
+    },
+    "require"          : {
+        "php": ">=5.5.0"
+    },
+    "require-dev"      : {
+        "squizlabs/php_codesniffer": "^2.5.0",
+        "peridot-php/peridot"      : "^1.16.0",
+        "mockery/mockery"          : "^0.9.4",
+        "satooshi/php-coveralls"   : "^1.0.0",
+        "apigen/apigen"            : "^4.1.2"
+    },
+    "autoload"         : {
+        "psr-4": {
+            "Ecailles\\Randomizer\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable"    : true,
+    "scripts"          : {
+        "test"   : [
+            "phpcs --colors",
+            "peridot -g *Spec.php specs/"
+        ],
+        "docs"   : [
+            "apigen generate -d api/"
+        ],
+        "test-ci": [
+            "phpcs --colors",
+            "peridot -g *Spec.php specs/"
+        ]
+    },
+    "archive"          : {
+        "exclude": [
+            ".gitattributes",
+            ".gitignore",
+            ".editorconfig",
+            "package.json",
+            "composer.json",
+            ".remarkignore",
+            ".remarkrc",
+            "phpcs.xml.dist",
+            "peridot.php",
+            ".coveralls.yml",
+            "/specs/",
+            "apigen.neon",
+            "circle.yml"
+        ]
+    },
+    "extra"            : {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}

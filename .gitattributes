@@ -1,0 +1,15 @@
+* text=auto
+
+.gitattributes export-ignore
+.gitignore export-ignore
+.editorconfig export-ignore
+package.json export-ignore
+composer.json export-ignore
+.remarkignore export-ignore
+.remarkrc export-ignore
+phpcs.xml.dist export-ignore
+peridot.php export-ignore
+.coveralls.yml export-ignore
+/specs/ export-ignore
+apigen.neon export-ignore
+circle.yml export-ignore
