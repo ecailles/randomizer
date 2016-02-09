@@ -1,5 +1,6 @@
 <?php
 use Evenement\EventEmitterInterface;
+use expect\peridot\ExpectPlugin;
 use Peridot\Concurrency\ConcurrencyPlugin;
 use Peridot\Plugin\Watcher\WatcherPlugin;
 use Peridot\Reporter\CodeCoverage\AbstractCodeCoverageReporter;
@@ -18,4 +19,8 @@ return function (EventEmitterInterface $emitter) {
     $watcher     = new WatcherPlugin($emitter);
 
     $watcher->track(__DIR__ . '/src');
+
+    $expect = ExpectPlugin::create();
+
+    $expect->registerTo($emitter);
 };

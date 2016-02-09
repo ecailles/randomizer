@@ -33,6 +33,7 @@
         "peridot-php/peridot-code-coverage-reporters": "^1.0.2",
         "peridot-php/peridot-concurrency"            : "^1.1.0",
         "peridot-php/peridot-watcher-plugin"         : "^1.3.1",
+        "expect/peridot-expect-plugin"               : "^3.0.3",
         "mockery/mockery"                            : "^0.9.4",
         "satooshi/php-coveralls"                     : "^1.0.0",
         "apigen/apigen"                              : "^4.1.2"
