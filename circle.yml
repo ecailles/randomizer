@@ -23,7 +23,7 @@ dependencies:
 
     override:
         - npm install
-        - for PHP_VERSION in "${PHP_VERSIONS[@]}"; do phpenv global "$PHP_VERSION"; composer install --prefer-source --no-interaction; rm -rf composer.lock; mv vendor "vendor.$PHP_VERSION"; done
+        - for PHP_VERSION in "${PHP_VERSIONS[@]}"; do phpenv global "$PHP_VERSION"; composer install --prefer-source --no-interaction; rm -rf composer.lock; mv vendor "/tmp/vendor.$PHP_VERSION"; done
 
     cache_directories:
         - node_modules
@@ -35,7 +35,7 @@ test:
 
     override:
         - npm run-script lint-ci
-        - for PHP_VERSION in "${PHP_VERSIONS[@]}"; do rm -rf "build"; phpenv global "$PHP_VERSION"; ln -snf "vendor.$PHP_VERSION" vendor; composer run-script test-ci; done
+        - for PHP_VERSION in "${PHP_VERSIONS[@]}"; do rm -rf "build"; phpenv global "$PHP_VERSION"; ln -snf "/tmp/vendor.$PHP_VERSION" vendor; composer run-script test-ci; done
 
     post:
         - vendor/bin/coveralls --verbose
