@@ -26,6 +26,9 @@ dependencies:
         - $HOME/.composer/cache/files
 
 test:
+    pre:
+        - sed -i 's/^;//' "$HOME/.phpenv/versions/$(phpenv global)/etc/conf.d/xdebug.ini"
+
     override:
         - npm run-script lint-ci
         - composer run-script test-ci
