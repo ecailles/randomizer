@@ -12,10 +12,6 @@ machine:
 
 dependencies:
     pre:
-        - rm -rf "$HOME/.nvm"
-        - git clone https://github.com/creationix/nvm.git "$HOME/.nvm"
-        - source "$HOME/.nvm/nvm.sh"
-        - nvm install node
         - npm config set progress false
         - npm install -g npm
         - composer self-update
