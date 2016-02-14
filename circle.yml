@@ -23,7 +23,7 @@ dependencies:
 
     override:
         - npm install
-        - for PHP_VERSION in "${PHP_VERSIONS[@]}"; do phpenv global "$PHP_VERSION"; composer install --prefer-source --no-interaction; phpenv rehash; done
+        - for PHP_VERSION in "${PHP_VERSIONS[@]}"; do phpenv global "$PHP_VERSION"; composer install --prefer-source --no-interaction; done
 
     cache_directories:
         - node_modules
