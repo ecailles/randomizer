@@ -15,7 +15,7 @@ dependencies:
         - nvm use 5.1.0
         - npm config set progress false
         - npm install -g npm
-        - composer self-update
+        - sudo composer self-update
 
     override:
         - npm install
