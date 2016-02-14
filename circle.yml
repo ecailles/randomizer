@@ -1,0 +1,37 @@
+general:
+    branches:
+        ignore:
+            - gh-pages
+
+    artifacts:
+        - build
+
+machine:
+    php:
+        varsion: 5.6.14
+
+dependencies:
+    pre:
+        - rm -rf "$HOME/.nvm"
+        - git clone https://github.com/creationix/nvm.git "$HOME/.nvm"
+        - source "$HOME/.nvm/nvm.sh"
+        - nvm install node
+        - npm config set progress false
+        - npm install -g npm
+        - composer self-update
+
+    override:
+        - npm install
+        - composer install --prefer-source --no-interaction
+
+    cache_directories:
+        - node_modules
+        - $HOME/.composer/cache/files
+
+test:
+    override:
+        - npm run-script test-ci
+        - composer run-script test-ci
+
+    post:
+        - vendor/bin/coveralls --verbose
