@@ -27,7 +27,7 @@ dependencies:
 
     cache_directories:
         - node_modules
-        - "$HOME/.composer/cache/files"
+        - "~/.composer/cache/files"
 
 test:
     pre:
