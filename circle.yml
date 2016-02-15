@@ -49,9 +49,10 @@ test:
         - npm run-script lint-ci
         - |
             for PHP_VERSION in "${PHP_VERSIONS[@]}"; do
+                rm -rf "vendor"
                 rm -rf "build"
                 phpenv global "$PHP_VERSION"
-                ln -snf "/tmp/vendor.$PHP_VERSION" vendor
+                cp -rf "/tmp/vendor.$PHP_VERSION" vendor
                 composer run-script test-ci
             done
 
