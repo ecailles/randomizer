@@ -64,7 +64,7 @@ deployment:
         branch: master
         commands:
             - |
-                if [ -z $CIRCLE_PULL_REQUEST ]; then
+                if [ -z "$CIRCLE_PULL_REQUEST" ]; then
                     REPOSITORY=${REPOSITORY:-"git@github.com:$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git"}
                     BRANCH=${BRANCH:-"gh-pages"}
                     APIGEN_BUILD_PATH=${APIGEN_BUILD_PATH:-"/tmp/apigen"}
