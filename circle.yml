@@ -21,8 +21,16 @@ dependencies:
         - nvm alias default node
         - npm config set progress false
         - npm install -g npm
-        - sudo composer self-update
-        - composer global require --prefer-source --no-interaction hirak/prestissimo
+        - |
+            for PHP_VERSION in "${PHP_VERSIONS[@]}"; do
+                phpenv global "$PHP_VERSION"
+                php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php
+                php -r "if (hash('SHA384', file_get_contents('composer-setup.php')) === '781c98992e23d4a5ce559daf0170f8a9b3b91331ddc4a3fa9f7d42b6d981513cdc1411730112495fbf9d59cffbf20fb2') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); }"
+                php composer-setup.php --install-dir="$HOME/.phpenv/versions/$(phpenv global)/bin" --filename=composer
+                phpenv rehash
+                composer self-update
+                composer global require --prefer-source --no-interaction hirak/prestissimo
+            done
 
     override:
         - npm install
