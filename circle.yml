@@ -57,3 +57,24 @@ test:
 
     post:
         - vendor/bin/coveralls --verbose
+
+deployment:
+    gh-pages:
+        branch: master
+        commands:
+            - |
+                if [ -z $CIRCLE_PULL_REQUEST ]; then
+                    REPOSITORY=${REPOSITORY:-"git@github.com:$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git"}
+                    BRANCH=${BRANCH:-"gh-pages"}
+                    APIGEN_BUILD_PATH=${APIGEN_BUILD_PATH:-"/tmp/apigen"}
+                    GIT_AUTHOR_NAME=${GIT_AUTHOR_NAME:-"CircleCI"}
+                    GIT_AUTHOR_EMAIL=${GIT_AUTHOR_EMAIL:-"circleci@circleci.com"}
+                    git clone --branch "$BRANCH" --depth 1 "$REPOSITORY" "$APIGEN_BUILD_PATH"
+                    yes | vendor/bin/apigen generate -d "$APIGEN_BUILD_PATH"
+                    cd "$APIGEN_BUILD_PATH" || exit 1
+                    git config user.name "$GIT_AUTHOR_NAME"
+                    git config user.email "$GIT_AUTHOR_EMAIL"
+                    git add -A
+                    git commit -m 'docs: generate API documentation'
+                    git push origin "$BRANCH"
+                fi
