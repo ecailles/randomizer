@@ -57,13 +57,11 @@ test:
                 composer run-script test-ci
             done
 
-    post:
-        - vendor/bin/coveralls --verbose
-
 deployment:
     gh-pages:
         branch: master
         commands:
+            - vendor/bin/coveralls --verbose
             - |
                 if [ -z "$CIRCLE_PULL_REQUEST" ]; then
                     REPOSITORY=${REPOSITORY:-"git@github.com:$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git"}
@@ -80,3 +78,8 @@ deployment:
                     git commit -m 'docs: generate API documentation'
                     git push origin "$BRANCH"
                 fi
+
+    all:
+        branch: /.*/
+        commands:
+            - vendor/bin/coveralls --verbose
