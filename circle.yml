@@ -59,6 +59,7 @@ test:
 
 deployment:
     gh-pages:
+        owner: ecailles
         branch: master
         commands:
             - vendor/bin/coveralls --verbose
@@ -80,6 +81,7 @@ deployment:
                 fi
 
     all:
+        owner: ecailles
         branch: /.*/
         commands:
             - vendor/bin/coveralls --verbose
