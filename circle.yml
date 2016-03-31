@@ -80,6 +80,31 @@ deployment:
                     git push origin "$BRANCH"
                 fi
 
+    gh-pages-release:
+        owner: ecailles
+        tag: /v[0-9]+(\.[0-9]+)*/
+        commands:
+            - vendor/bin/coveralls --verbose
+            - |
+                if [ -z "$CIRCLE_PULL_REQUEST" ]; then
+                    REPOSITORY=${REPOSITORY:-"git@github.com:$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git"}
+                    BRANCH=${BRANCH:-"gh-pages"}
+                    TAG="$CIRCLE_TAG-gh-pages"
+                    TAG_MESSAGE=$(echo "$CIRCLE_TAG" | sed -e "s/v\([0-9]\+\(.[0-9]\+\)*\)/\1-gh-pages/")
+                    APIGEN_BUILD_PATH=${APIGEN_BUILD_PATH:-"/tmp/apigen"}
+                    GIT_AUTHOR_NAME=${GIT_AUTHOR_NAME:-"CircleCI"}
+                    GIT_AUTHOR_EMAIL=${GIT_AUTHOR_EMAIL:-"circleci@circleci.com"}
+                    git clone --branch "$BRANCH" --depth 1 "$REPOSITORY" "$APIGEN_BUILD_PATH"
+                    yes | vendor/bin/apigen generate -d "$APIGEN_BUILD_PATH"
+                    cd "$APIGEN_BUILD_PATH" || exit 1
+                    git config user.name "$GIT_AUTHOR_NAME"
+                    git config user.email "$GIT_AUTHOR_EMAIL"
+                    git add -A
+                    git commit -m 'docs: generate API documentation'
+                    git tag -a "$TAG" -m "$TAG_MESSAGE"
+                    git push origin "$BRANCH" --follow-tags
+                fi
+
     all:
         owner: ecailles
         branch: /.*/
