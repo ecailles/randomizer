@@ -44,14 +44,14 @@ dependencies:
 
 test:
     pre:
-        - sed -i 's/^;//' "$HOME/.phpenv/versions/$(phpenv global)/etc/conf.d/xdebug.ini":
+        - if [ -z "$CIRCLE_PULL_REQUEST" ]; then sed -i 's/^;//' "$HOME/.phpenv/versions/$(phpenv global)/etc/conf.d/xdebug.ini"; fi:
             parallel: true
 
     override:
         - npm run-script lint-ci
         - composer run-script test-ci:
             parallel: true
-        - vendor/bin/coveralls --verbose:
+        - if [ -z "$CIRCLE_PULL_REQUEST" ]; then vendor/bin/coveralls --verbose; fi:
             parallel: true
 
 deployment:
