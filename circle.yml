@@ -51,6 +51,8 @@ test:
         - npm run-script lint-ci
         - composer run-script test-ci:
             parallel: true
+
+    post:
         - if [ -z "$CIRCLE_PULL_REQUEST" ]; then vendor/bin/coveralls --verbose; fi:
             parallel: true
 
